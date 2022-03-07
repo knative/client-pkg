@@ -5,15 +5,14 @@ aliases:
   api-core-wg-leads:
   - dprotaso
   autoscaling-reviewers:
+  - nader-ziada
   - psschwei
+  - skonto
   - taragu
   autoscaling-wg-leads:
-  - markusthoemmes
-  - vagababov
+  - julz
   autoscaling-writers:
   - julz
-  - markusthoemmes
-  - vagababov
   - yanweiguo
   client-reviewers:
   - itsmurugappan
@@ -33,18 +32,17 @@ aliases:
   - omerbensaadon
   - salaboy
   docs-reviewers:
-  - RichardJJG
-  - mpetason
   - nainaz
   - omerbensaadon
   - pmbanugo
   - snneji
-  docs-wg-leads: []
+  docs-wg-leads:
+  - csantanapr
+  - snneji
   docs-writers:
-  - RichardJJG
   - abrennan89
-  - carieshmarie
-  - richieescarez
+  - csantanapr
+  - psschwei
   - snneji
   eventing-reviewers:
   - aslom
@@ -68,29 +66,29 @@ aliases:
   - pierDipi
   - vaikas
   knative-admin:
-  - benmoss
-  - bsnchan
+  - carlisia
+  - csantanapr
   - dprotaso
-  - duglin
   - evankanderson
+  - itsmurugappan
   - julz
   - knative-prow-releaser-robot
   - knative-prow-robot
   - knative-prow-updater-robot
   - knative-test-reporter-robot
-  - markusthoemmes
-  - mbehrendt
-  - omerbensaadon
+  - kvmware
+  - lance
   - pmorie
   - rhuss
-  - salaboy
+  - smoser-ibm
   - spencerdillard
   - thisisnotapril
   - vaikas
+  - xtreme-sameer-vohra
   knative-release-leads:
-  - benmoss
-  - julz
-  - salaboy
+  - carlisia
+  - kvmware
+  - xtreme-sameer-vohra
   knative-robots:
   - knative-prow-releaser-robot
   - knative-prow-robot
@@ -102,7 +100,6 @@ aliases:
   - andrew-su
   - arturenault
   - carlisia
-  - markusthoemmes
   - nak3
   - shashwathi
   - tcnghia
@@ -121,8 +118,8 @@ aliases:
   - aliok
   - houshengbo
   - jcrossley3
-  - markusthoemmes
   - matzew
+  - maximilien
   - trshafer
   operations-wg-leads:
   - houshengbo
@@ -131,8 +128,8 @@ aliases:
   - aliok
   - houshengbo
   - jcrossley3
-  - markusthoemmes
   - matzew
+  - maximilien
   - trshafer
   pkg-configmap-reviewers:
   - dprotaso
@@ -158,17 +155,17 @@ aliases:
   - efiturri
   - evankanderson
   - gerardo-lc
-  - joshua-bone
   - kvmware
-  - steuhs
+  - mgencur
+  - shinigambit
   productivity-wg-leads:
   - chizhg
-  - n3wscott
   productivity-writers:
+  - cardil
   - chaodaiG
   - chizhg
   - coryrc
-  - n3wscott
+  - psschwei
   security-wg-leads:
   - evankanderson
   - julz
@@ -183,20 +180,22 @@ aliases:
   serving-reviewers:
   - carlisia
   - julz
+  - nader-ziada
   - nealhu
   - psschwei
+  - skonto
   - whaught
   serving-writers:
   - dprotaso
   - julz
-  - markusthoemmes
   - tcnghia
   - vagababov
   source-wg-leads:
   - lionelvillard
   steering-committee:
-  - bsnchan
-  - mbehrendt
+  - csantanapr
+  - itsmurugappan
+  - lance
   - pmorie
   - thisisnotapril
   - vaikas
@@ -204,15 +203,14 @@ aliases:
   - dprotaso
   - evankanderson
   - julz
-  - markusthoemmes
   - rhuss
   trademark-committee:
-  - duglin
-  - omerbensaadon
+  - evankanderson
+  - smoser-ibm
   - spencerdillard
   ux-wg-leads:
   - csantanapr
-  - omerbensaadon
+  - snneji
   ux-writers:
   - csantanapr
-  - omerbensaadon
+  - snneji
