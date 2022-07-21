@@ -14,8 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-export DISABLE_MD_LINTING=1
-
 source $(dirname $0)/../vendor/knative.dev/hack/presubmit-tests.sh
 
 main $@
