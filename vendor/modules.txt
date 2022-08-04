@@ -126,13 +126,13 @@ gotest.tools/v3/internal/assert
 gotest.tools/v3/internal/difflib
 gotest.tools/v3/internal/format
 gotest.tools/v3/internal/source
-# k8s.io/api v0.23.8
+# k8s.io/api v0.23.9
 ## explicit
 k8s.io/api/apps/v1
 k8s.io/api/authentication/v1
 k8s.io/api/batch/v1
 k8s.io/api/core/v1
-# k8s.io/apimachinery v0.23.8
+# k8s.io/apimachinery v0.23.9
 ## explicit
 k8s.io/apimachinery/pkg/api/equality
 k8s.io/apimachinery/pkg/api/errors
@@ -175,7 +175,7 @@ k8s.io/apimachinery/pkg/util/yaml
 k8s.io/apimachinery/pkg/version
 k8s.io/apimachinery/pkg/watch
 k8s.io/apimachinery/third_party/forked/golang/reflect
-# k8s.io/client-go v0.23.8
+# k8s.io/client-go v0.23.9
 k8s.io/client-go/dynamic
 k8s.io/client-go/pkg/apis/clientauthentication
 k8s.io/client-go/pkg/apis/clientauthentication/install
@@ -196,9 +196,11 @@ k8s.io/client-go/util/connrotation
 k8s.io/client-go/util/flowcontrol
 k8s.io/client-go/util/keyutil
 k8s.io/client-go/util/workqueue
-# k8s.io/klog/v2 v2.60.1-0.20220317184644-43cc75f9ae89
+# k8s.io/klog/v2 v2.70.2-0.20220707122935-0990e81f1a8f
 k8s.io/klog/v2
 k8s.io/klog/v2/internal/buffer
+k8s.io/klog/v2/internal/clock
+k8s.io/klog/v2/internal/dbg
 k8s.io/klog/v2/internal/serialize
 k8s.io/klog/v2/internal/severity
 # k8s.io/utils v0.0.0-20220210201930-3a6ce19ff2f9
@@ -214,11 +216,11 @@ k8s.io/utils/trace
 # knative.dev/hack v0.0.0-20220728013938-9dabf7cf62e3
 ## explicit
 knative.dev/hack
-# knative.dev/networking v0.0.0-20220723000421-cddb0ff95789
+# knative.dev/networking v0.0.0-20220730012038-20876d76e2ad
 knative.dev/networking/pkg/apis/networking
 knative.dev/networking/pkg/apis/networking/v1alpha1
 knative.dev/networking/pkg/config
-# knative.dev/pkg v0.0.0-20220728013737-449f7e6dab63
+# knative.dev/pkg v0.0.0-20220802185824-a01dfedb0486
 ## explicit
 knative.dev/pkg/apis
 knative.dev/pkg/apis/duck
@@ -235,7 +237,7 @@ knative.dev/pkg/network
 knative.dev/pkg/profiling
 knative.dev/pkg/ptr
 knative.dev/pkg/tracker
-# knative.dev/serving v0.33.1-0.20220728203237-8fc6d878ebd6
+# knative.dev/serving v0.33.1-0.20220804124521-e9a0ce988ebf
 ## explicit
 knative.dev/serving/pkg/apis/autoscaling
 knative.dev/serving/pkg/apis/autoscaling/v1alpha1
