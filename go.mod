@@ -8,7 +8,7 @@ require (
 	gotest.tools/v3 v3.1.0
 	k8s.io/api v0.23.9
 	k8s.io/apimachinery v0.23.9
-	knative.dev/hack v0.0.0-20220728013938-9dabf7cf62e3
-	knative.dev/pkg v0.0.0-20220802185824-a01dfedb0486
-	knative.dev/serving v0.33.1-0.20220804124521-e9a0ce988ebf
+	knative.dev/hack v0.0.0-20220823140917-8d1e4ccf9dc3
+	knative.dev/pkg v0.0.0-20220818004048-4a03844c0b15
+	knative.dev/serving v0.33.1-0.20220823133223-8a2fb54c5359
 )
