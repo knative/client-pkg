@@ -4,11 +4,13 @@ go 1.16
 
 require (
 	github.com/mitchellh/go-homedir v1.1.0
+	github.com/spf13/afero v1.8.0 // indirect
 	github.com/spf13/cobra v1.3.0
 	github.com/spf13/pflag v1.0.5
-	github.com/spf13/viper v1.10.0
+	github.com/spf13/viper v1.10.1
 	gotest.tools/v3 v3.1.0
 	k8s.io/api v0.23.9
+	k8s.io/apiextensions-apiserver v0.23.9
 	k8s.io/apimachinery v0.23.9
 	k8s.io/client-go v0.23.9
 	knative.dev/eventing v0.34.3
