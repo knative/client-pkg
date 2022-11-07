@@ -18,5 +18,5 @@ import (
 	"testing"
 )
 
-func TestDummy(t *testing.T) {
+func TestPlaceholder(t *testing.T) {
 }
