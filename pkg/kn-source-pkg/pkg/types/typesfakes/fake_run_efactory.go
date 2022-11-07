@@ -4,9 +4,9 @@ package typesfakes
 import (
 	"sync"
 
-	"knative.dev/client-pkg/pkg/kn-source-pkg/pkg/types"
 	"github.com/spf13/cobra"
 	"k8s.io/client-go/rest"
+	"knative.dev/client-pkg/pkg/kn-source-pkg/pkg/types"
 )
 
 type FakeRunEFactory struct {

@@ -27,6 +27,7 @@ import (
 type RunE = func(cmd *cobra.Command, args []string) error
 
 // KnSourceClient is the base interface for all kn-source-extension
+//
 //counterfeiter:generate . KnSourceClient
 type KnSourceClient interface {
 	KnSourceParams() *KnSourceParams
@@ -35,6 +36,7 @@ type KnSourceClient interface {
 }
 
 // KnSourceFactory is the base factory interface for all kn-source-extension factories
+//
 //counterfeiter:generate . KnSourceFactory
 type KnSourceFactory interface {
 	KnSourceParams() *KnSourceParams
@@ -44,6 +46,7 @@ type KnSourceFactory interface {
 }
 
 // CommandFactory is the factory for cobra.Command objects
+//
 //counterfeiter:generate . CommandFactory
 type CommandFactory interface {
 	SourceCommand() *cobra.Command
@@ -58,6 +61,7 @@ type CommandFactory interface {
 }
 
 // FlagsFactory is the factory for pflag.FlagSet objects
+//
 //counterfeiter:generate . FlagsFactory
 type FlagsFactory interface {
 	ListFlags() *pflag.FlagSet
@@ -70,6 +74,7 @@ type FlagsFactory interface {
 }
 
 // RunEFactory is the factory for RunE objects
+//
 //counterfeiter:generate . RunEFactory
 type RunEFactory interface {
 	ListRunE() RunE

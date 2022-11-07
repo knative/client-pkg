@@ -4,8 +4,8 @@ package typesfakes
 import (
 	"sync"
 
-	"knative.dev/client-pkg/pkg/kn-source-pkg/pkg/types"
 	"github.com/spf13/pflag"
+	"knative.dev/client-pkg/pkg/kn-source-pkg/pkg/types"
 )
 
 type FakeFlagsFactory struct {

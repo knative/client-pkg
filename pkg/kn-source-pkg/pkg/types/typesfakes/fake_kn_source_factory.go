@@ -4,8 +4,8 @@ package typesfakes
 import (
 	"sync"
 
-	"knative.dev/client-pkg/pkg/kn-source-pkg/pkg/types"
 	"k8s.io/client-go/rest"
+	"knative.dev/client-pkg/pkg/kn-source-pkg/pkg/types"
 )
 
 type FakeKnSourceFactory struct {
