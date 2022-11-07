@@ -16,7 +16,6 @@ package util
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"testing"
 
@@ -190,7 +189,7 @@ func funcRef(ref func(t *testing.T, err error)) *func(*testing.T, error) {
 }
 
 func TestGetEnvsFromFile(t *testing.T) {
-	file, err := ioutil.TempFile("", "test-1")
+	file, err := os.CreateTemp("", "test-1")
 	assert.NilError(t, err)
 	file.WriteString(`
 name=service-1
@@ -198,7 +197,7 @@ name=service-1
 target=hello-world
 
 `)
-	defer os.Remove(file.Name())
+	defer os.RemoveAll(file.Name())
 
 	envs, err := GetEnvsFromFile(file.Name(), "=")
 	assert.NilError(t, err)

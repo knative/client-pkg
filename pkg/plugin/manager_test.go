@@ -16,7 +16,7 @@ package plugin
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -357,7 +357,7 @@ func setup(t *testing.T) testContext {
 }
 
 func setupWithPathLookup(t *testing.T, lookupInPath bool) testContext {
-	tmpPathDir, err := ioutil.TempDir("", "plugin_list")
+	tmpPathDir, err := os.MkdirTemp("", "plugin_list")
 	assert.NilError(t, err)
 	return testContext{
 		pluginsDir:    tmpPathDir,
@@ -382,13 +382,13 @@ func executePlugin(plugin Plugin, args []string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	out, _ := ioutil.ReadAll(r)
+	out, _ := io.ReadAll(r)
 	return string(out), nil
 }
 
 // Prepare a directory and set the path to this directory
 func preparePathDirectory(t *testing.T) (string, func()) {
-	tmpPathDir, err := ioutil.TempDir("", "plugin_path")
+	tmpPathDir, err := os.MkdirTemp("", "plugin_path")
 	assert.NilError(t, err)
 
 	oldPath := os.Getenv("PATH")
@@ -415,13 +415,12 @@ func createTestPluginInDirectory(t *testing.T, name string, dir string) string {
 		script = testPluginScriptUnix
 	}
 	fullPath := filepath.Join(dir, nameExt)
-	err := ioutil.WriteFile(fullPath, []byte(script), 0777)
+	err := os.WriteFile(fullPath, []byte(script), 0777)
 	assert.NilError(t, err)
 	// Some extra files to feed the tests
-	err = ioutil.WriteFile(filepath.Join(dir, "non-plugin-prefix-"+nameExt), []byte{}, 0555)
+	err = os.WriteFile(filepath.Join(dir, "non-plugin-prefix-"+nameExt), []byte{}, 0555)
 	assert.NilError(t, err)
-	_, err = ioutil.TempDir(dir, "bogus-dir")
-	assert.NilError(t, err)
+	os.MkdirTemp(dir, "bogus-dir")
 
 	return fullPath
 }

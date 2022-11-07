@@ -40,8 +40,8 @@ func isEmptyConfigError(err error) bool {
 	return strings.Contains(err.Error(), "no configuration has been provided")
 }
 
-//Retrieves a custom error struct based on the original error APIStatus struct
-//Returns the original error struct in case it can't identify the kind of APIStatus error
+// Retrieves a custom error struct based on the original error APIStatus struct
+// Returns the original error struct in case it can't identify the kind of APIStatus error
 func GetError(err error) error {
 	if err == nil {
 		return nil
