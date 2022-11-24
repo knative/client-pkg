@@ -197,7 +197,7 @@ name=service-1
 target=hello-world
 
 `)
-	defer os.RemoveAll(file.Name())
+	defer os.Remove(file.Name())
 
 	envs, err := GetEnvsFromFile(file.Name(), "=")
 	assert.NilError(t, err)
