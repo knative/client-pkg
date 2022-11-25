@@ -43,7 +43,6 @@ aliases:
   - akashrv
   - lberk
   eventing-wg-leads:
-  - lionelvillard
   - pierDipi
   eventing-writers:
   - akashrv
@@ -78,9 +77,7 @@ aliases:
   - knative-test-reporter-robot
   - kvmware
   - lance
-  - lionelvillard
   - mchmarny
-  - nak3
   - pmorie
   - psschwei
   - smoser-ibm
@@ -89,8 +86,8 @@ aliases:
   - vaikas
   - zroubalik
   knative-release-leads:
-  - lionelvillard
-  - nak3
+  - evankanderson
+  - psschwei
   knative-robots:
   - knative-automation
   - knative-prow-releaser-robot
@@ -108,11 +105,9 @@ aliases:
   - tcnghia
   - vagababov
   - yanweiguo
-  networking-wg-leads:
-  - nak3
+  networking-wg-leads: []
   networking-writers:
   - JRBANCEL
-  - nak3
   - vagababov
   operations-reviewers:
   - Cynocracy
@@ -171,10 +166,8 @@ aliases:
   - upodroid
   security-wg-leads:
   - evankanderson
-  - julz
   security-writers:
   - evankanderson
-  - julz
   serving-observability-reviewers:
   - skonto
   - yanweiguo
