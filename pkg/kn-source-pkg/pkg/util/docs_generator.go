@@ -17,6 +17,7 @@ package util
 import (
 	"bufio"
 	"bytes"
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -74,15 +75,13 @@ func readmeGenerator(cmd *cobra.Command, filepath string) error {
 	reader := bufio.NewReader(writer)
 	for {
 		line, err := reader.ReadString('\n')
-		if err == io.EOF {
+		if errors.Is(err, io.EOF) {
 			break
 		}
 		if err != nil {
 			return err
 		}
-		if strings.Contains(line, "##") {
-			line = strings.Replace(line, "##", "###", 1)
-		}
+		line = strings.Replace(line, "##", "###", 1)
 		_, err = io.WriteString(mdFile, line)
 		if err != nil {
 			return err

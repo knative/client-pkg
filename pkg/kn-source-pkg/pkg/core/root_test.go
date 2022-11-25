@@ -50,24 +50,6 @@ func TestNewKnSourceCommand(t *testing.T) {
 
 // Private test methods
 
-func testSubCommandsCommonFlags(t *testing.T, cmd *cobra.Command) {
-	for _, childCmd := range cmd.Commands() {
-		if childCmd.Name() == "help" {
-			continue
-		}
-
-		testCommonFlags(t, childCmd)
-	}
-}
-
-func testCommonFlags(t *testing.T, cmd *cobra.Command) {
-	namespaceFlag := cmd.Flag("sync")
-	assert.Assert(t, namespaceFlag != nil)
-
-	syncFlag := cmd.Flag("sync")
-	assert.Assert(t, syncFlag != nil)
-}
-
 func testSubCommands(t *testing.T, cmd *cobra.Command, subCommandNames []string) {
 	assert.Equal(t, len(cmd.Commands()), len(subCommandNames))
 	childrenSubCommandsMap := map[string]bool{}
