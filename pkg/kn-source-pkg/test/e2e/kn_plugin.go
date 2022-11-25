@@ -22,7 +22,7 @@ import (
 	"strings"
 
 	homedir "github.com/mitchellh/go-homedir"
-	"knative.dev/client/lib/test"
+	"knative.dev/client-pkg/pkg/util/lib/test"
 )
 
 type knPlugin struct {

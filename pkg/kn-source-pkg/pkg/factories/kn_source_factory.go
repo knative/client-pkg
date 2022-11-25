@@ -19,7 +19,7 @@ import (
 	"knative.dev/client-pkg/pkg/kn-source-pkg/pkg/client"
 	"knative.dev/client-pkg/pkg/kn-source-pkg/pkg/types"
 
-	"knative.dev/client/pkg/kn/commands/flags"
+	"knative.dev/client-pkg/pkg/kn/commands/flags"
 )
 
 type DefautKnSourceFactory struct {

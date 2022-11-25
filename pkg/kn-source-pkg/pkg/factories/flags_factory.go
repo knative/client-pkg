@@ -16,7 +16,7 @@ package factories
 
 import (
 	"knative.dev/client-pkg/pkg/kn-source-pkg/pkg/types"
-	"knative.dev/client/pkg/kn/commands"
+	"knative.dev/client-pkg/pkg/kn/commands"
 
 	"github.com/spf13/pflag"
 )

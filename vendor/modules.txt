@@ -879,31 +879,6 @@ k8s.io/utils/net
 k8s.io/utils/pointer
 k8s.io/utils/strings/slices
 k8s.io/utils/trace
-# knative.dev/client v0.35.1
-## explicit; go 1.18
-knative.dev/client/lib/test
-knative.dev/client/pkg/apis/client
-knative.dev/client/pkg/apis/client/v1alpha1
-knative.dev/client/pkg/config
-knative.dev/client/pkg/dynamic
-knative.dev/client/pkg/dynamic/fake
-knative.dev/client/pkg/errors
-knative.dev/client/pkg/eventing/v1
-knative.dev/client/pkg/eventing/v1beta1
-knative.dev/client/pkg/kn/commands
-knative.dev/client/pkg/kn/commands/flags
-knative.dev/client/pkg/kn/config
-knative.dev/client/pkg/kn/flags
-knative.dev/client/pkg/messaging/v1
-knative.dev/client/pkg/printers
-knative.dev/client/pkg/serving
-knative.dev/client/pkg/serving/v1
-knative.dev/client/pkg/serving/v1alpha1
-knative.dev/client/pkg/sources/v1
-knative.dev/client/pkg/sources/v1beta2
-knative.dev/client/pkg/util
-knative.dev/client/pkg/util/mock
-knative.dev/client/pkg/wait
 # knative.dev/eventing v0.35.1-0.20221118131140-41653ce64478
 ## explicit; go 1.18
 knative.dev/eventing/pkg/apis/config
@@ -924,11 +899,14 @@ knative.dev/eventing/pkg/apis/sources/v1
 knative.dev/eventing/pkg/apis/sources/v1beta2
 knative.dev/eventing/pkg/client/clientset/versioned/scheme
 knative.dev/eventing/pkg/client/clientset/versioned/typed/eventing/v1
+knative.dev/eventing/pkg/client/clientset/versioned/typed/eventing/v1/fake
 knative.dev/eventing/pkg/client/clientset/versioned/typed/eventing/v1beta1
+knative.dev/eventing/pkg/client/clientset/versioned/typed/eventing/v1beta1/fake
 knative.dev/eventing/pkg/client/clientset/versioned/typed/messaging/v1
 knative.dev/eventing/pkg/client/clientset/versioned/typed/sources/v1
 knative.dev/eventing/pkg/client/clientset/versioned/typed/sources/v1/fake
 knative.dev/eventing/pkg/client/clientset/versioned/typed/sources/v1beta2
+knative.dev/eventing/pkg/client/clientset/versioned/typed/sources/v1beta2/fake
 # knative.dev/hack v0.0.0-20221122182941-c12c1bfbd6d2
 ## explicit; go 1.18
 knative.dev/hack

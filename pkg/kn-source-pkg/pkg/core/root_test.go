@@ -82,7 +82,7 @@ func testSubCommandsRunE(t *testing.T, cmd *cobra.Command, subCommandNames []str
 	}
 	assert.Equal(t, len(childrenSubCommandsMap), len(subCommandNames))
 	for _, childCmd := range cmd.Commands() {
-		if childCmd.Name() != "help" && childrenSubCommandsMap[childCmd.Name()] == nil {
+		if _, ok := childrenSubCommandsMap[childCmd.Name()]; childCmd.Name() != "help" && !ok {
 			t.Errorf(fmt.Sprintf("did not find RunE func for command %s", childCmd.Name()))
 		}
 	}

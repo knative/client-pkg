@@ -20,7 +20,7 @@ import (
 	"github.com/spf13/cobra"
 	"gotest.tools/v3/assert"
 
-	"knative.dev/client/pkg/kn/commands/flags"
+	"knative.dev/client-pkg/pkg/kn/commands/flags"
 )
 
 func TestAddCommonFlags(t *testing.T) {

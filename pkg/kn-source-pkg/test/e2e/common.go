@@ -15,7 +15,7 @@
 package e2e
 
 import (
-	"knative.dev/client/lib/test"
+	"knative.dev/client-pkg/pkg/util/lib/test"
 )
 
 type E2ETest struct {
