@@ -15,7 +15,6 @@
 package util
 
 import (
-	"io/ioutil"
 	"log"
 	"os"
 	"testing"
@@ -30,7 +29,7 @@ func TestReadmeGenerator(t *testing.T) {
 		Short: "Knative eventing {{.Name}} source plugin",
 		Long:  "Manage your Knative {{.Name}} eventing sources",
 	}
-	tmpfile, err := ioutil.TempFile("", "testdoc")
+	tmpfile, err := os.CreateTemp("", "testdoc")
 	if err != nil {
 		log.Fatal(err)
 	}

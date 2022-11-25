@@ -16,7 +16,6 @@ package e2e
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -100,12 +99,12 @@ func (kp *knPlugin) Uninstall() error {
 // Utility functions
 
 func copyPluginFile(sourceFile string, destDir string) error {
-	input, err := ioutil.ReadFile(sourceFile)
+	input, err := os.ReadFile(sourceFile)
 	if err != nil {
 		return err
 	}
 
-	err = ioutil.WriteFile(destDir, input, 0700)
+	err = os.WriteFile(destDir, input, 0700)
 	if err != nil {
 		return err
 	}
