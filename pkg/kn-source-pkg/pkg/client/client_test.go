@@ -47,9 +47,5 @@ func TestRestConfig(t *testing.T) {
 // Private
 
 func newFakeKnSourceClient() *knSourceClient {
-	return &knSourceClient{
-		knSourceParams: &types.KnSourceParams{},
-		namespace:      "fake-namespace",
-		restConfig:     &rest.Config{},
-	}
+	return NewKnSourceClient(&types.KnSourceParams{}, &rest.Config{}, "fake-namespace").(*knSourceClient)
 }

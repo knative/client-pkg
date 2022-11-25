@@ -37,7 +37,7 @@ func NewKnSourceCommand(knSourceFactory types.KnSourceFactory,
 	rootCmd.SilenceErrors = true
 
 	if knSourceParams.Output != nil {
-		rootCmd.SetOutput(knSourceParams.Output)
+		rootCmd.SetOut(knSourceParams.Output)
 	}
 
 	listCmd := commandFactory.ListCommand()

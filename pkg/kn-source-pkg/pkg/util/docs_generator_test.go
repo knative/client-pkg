@@ -36,4 +36,5 @@ func TestReadmeGenerator(t *testing.T) {
 	defer os.Remove(tmpfile.Name())
 	err = readmeGenerator(testCmd, tmpfile.Name())
 	assert.NilError(t, err)
+	assert.NilError(t, ReadmeGenerator(testCmd))
 }
