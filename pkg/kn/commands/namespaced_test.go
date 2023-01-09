@@ -19,7 +19,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"knative.dev/client-pkg/pkg/util/lib/test"
+	"knative.dev/client-pkg/pkg/util/test"
 
 	"k8s.io/client-go/tools/clientcmd"
 

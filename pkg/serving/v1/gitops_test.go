@@ -21,13 +21,13 @@ import (
 	"time"
 
 	"gotest.tools/v3/assert"
+	libtest "knative.dev/client-pkg/pkg/util/test"
 
 	corev1 "k8s.io/api/core/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	servingtest "knative.dev/serving/pkg/testing/v1"
 
-	libtest "knative.dev/client-pkg/pkg/util/lib/test"
 	"knative.dev/pkg/ptr"
 	servingv1 "knative.dev/serving/pkg/apis/serving/v1"
 )
