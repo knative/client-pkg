@@ -24,7 +24,7 @@ import (
 
 	"gotest.tools/v3/assert"
 	"knative.dev/client-pkg/pkg/util"
-	"knative.dev/client-pkg/pkg/util/lib/test"
+	"knative.dev/client-pkg/pkg/util/test"
 )
 
 func TestBasicWorkflow(t *testing.T) {
