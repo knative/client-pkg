@@ -381,7 +381,7 @@ func TestNewServingV1alpha1Clients(t *testing.T) {
 			LogHTTP:      tc.logHttp,
 		}
 
-		servingV1alpha1Client, err := p.newServingClientV1alpha1(namespace)
+		servingV1alpha1Client, err := p.newServingClientV1beta1(namespace)
 
 		switch len(tc.expectedErrString) {
 		case 0:
@@ -507,7 +507,7 @@ func TestInitialize(t *testing.T) {
 	params := &KnParams{}
 	params.Initialize()
 	assert.Assert(t, params.NewServingClient != nil)
-	assert.Assert(t, params.NewServingV1alpha1Client != nil)
+	assert.Assert(t, params.NewServingV1beta1Client != nil)
 	assert.Assert(t, params.NewGitopsServingClient != nil)
 	assert.Assert(t, params.NewSourcesClient != nil)
 	assert.Assert(t, params.NewEventingClient != nil)
