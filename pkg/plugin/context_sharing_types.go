@@ -38,12 +38,17 @@ type PluginWithManifest interface {
 	// Plugin original interface wrapper
 	Plugin
 
-	// GetManifest
+	// GetManifest returns a metadata descriptor of plugin
 	GetManifest() *Manifest
 
-	// GetContextData
+	// GetContextData returns a map structure that is used to share common context data from plugin
 	GetContextData() map[string]string
 
-	// ExecuteWithContext
-	ExecuteWithContext(ctx map[string]string, args []string) error
+	// ExecuteWithContextData an extended version of plugin.Execute command to allow injection and use of ContextData.
+	// This is a map[string]string structure to share common value service name between kn and plugins.
+	ExecuteWithContextData(ctx map[string]string, args []string) error
+	// Alternative impl: use of native context.Context as a data structure.
+	// We decided to use plain map, because Context can't be extended to external plugins anyway.
+	// Another encode to JSON is required to pass it. We might reconsider that in future development iterations.
+
 }
