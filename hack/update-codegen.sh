@@ -32,9 +32,8 @@ group "Kubernetes Codegen"
 #                  k8s.io/kubernetes. The output-base is needed for the generators to output into the vendor dir
 #                  instead of the $GOPATH directly. For normal projects this can be dropped.
 "${CODEGEN_PKG}"/generate-groups.sh "deepcopy" \
-  knative.dev/client-pkg/pkg/apis/client/v1alpha1/generated knative.dev/client-pkg/pkg/apis \
+  knative.dev/client-pkg/pkg/apis/client/v1alpha1 knative.dev/client-pkg/pkg/apis \
   client:v1alpha1 \
-  --output-base "$(dirname "${BASH_SOURCE[0]}")/../../.." \
   --go-header-file "${REPO_ROOT_DIR}"/hack/boilerplate.go.txt
 
 group "Update deps post-codegen"
