@@ -28,6 +28,7 @@ import (
 	"go.uber.org/zap/zaptest"
 	pkgcontext "knative.dev/client-pkg/pkg/context"
 	"knative.dev/client-pkg/pkg/output"
+	"knative.dev/client-pkg/pkg/output/environment"
 	"knative.dev/client-pkg/pkg/output/term"
 	"knative.dev/pkg/logging"
 )
@@ -118,9 +119,9 @@ func createDefaultLogger(ctx context.Context) *zap.Logger {
 	prtr := output.PrinterFrom(ctx)
 	errout := prtr.ErrOrStderr()
 	ec := zap.NewDevelopmentEncoderConfig()
-	ec.EncodeLevel = zapcore.CapitalColorLevelEncoder
-	if os.Getenv("NO_COLOR") != "" {
-		ec.EncodeLevel = zapcore.CapitalLevelEncoder
+	ec.EncodeLevel = zapcore.CapitalLevelEncoder
+	if environment.SupportsColor() {
+		ec.EncodeLevel = zapcore.CapitalColorLevelEncoder
 	}
 	ec.EncodeTime = ElapsedMillisTimeEncoder(time.Now())
 	ec.ConsoleSeparator = " "

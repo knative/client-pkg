@@ -21,6 +21,7 @@ import (
 	"os"
 
 	"golang.org/x/term"
+	"knative.dev/client-pkg/pkg/output/environment"
 )
 
 // IsReaderTerminal returns true if the given reader is a real terminal.
@@ -31,9 +32,9 @@ func IsReaderTerminal(r io.Reader) bool {
 
 // IsTerminal returns true if the given writer is a real terminal.
 func IsTerminal(w io.Writer) bool {
-	if forceColor() {
+	if environment.ColorIsForced() {
 		return true
 	}
 	f, ok := w.(*os.File)
-	return ok && supportsColor() && term.IsTerminal(int(f.Fd()))
+	return ok && environment.NonColorRequested() && term.IsTerminal(int(f.Fd()))
 }
