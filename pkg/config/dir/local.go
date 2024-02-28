@@ -20,9 +20,9 @@ import (
 	"context"
 	"log"
 	"os"
+	"path"
 
 	"emperror.dev/errors"
-	"github.com/kirsle/configdir"
 )
 
 const (
@@ -43,17 +43,29 @@ var (
 // Config returns the path to the config directory. It will be created if it
 // does not exist.
 func Config(ctx context.Context) string {
-	return userPath(ctx, configDirKey, ConfigDirEnvName, func() string {
-		return configdir.LocalConfig("kn")
-	})
+	return userPath(ctx, configDirKey, ConfigDirEnvName, localConfig)
 }
 
 // Cache returns the path to the cache directory. It will be created if it
 // does not exist.
 func Cache(ctx context.Context) string {
-	return userPath(ctx, cacheDirKey, CacheDirEnvName, func() string {
-		return configdir.LocalCache("kn")
-	})
+	return userPath(ctx, cacheDirKey, CacheDirEnvName, localCache)
+}
+
+func localConfig() string {
+	cd, err := os.UserConfigDir()
+	if err != nil {
+		log.Fatal(errors.WithStack(err))
+	}
+	return path.Join(cd, "kn")
+}
+
+func localCache() string {
+	cd, err := os.UserCacheDir()
+	if err != nil {
+		log.Fatal(errors.WithStack(err))
+	}
+	return path.Join(cd, "kn")
 }
 
 func userPath(ctx context.Context, key interface{}, envKey string, fn func() string) string {
@@ -68,7 +80,8 @@ func userPath(ctx context.Context, key interface{}, envKey string, fn func() str
 }
 
 func ensurePathExists(p string) string {
-	if err := configdir.MakePath(p); err != nil {
+	fileMode := os.FileMode(0o750)
+	if err := os.MkdirAll(p, fileMode); err != nil {
 		log.Fatal(errors.WithStack(err))
 	}
 	return p

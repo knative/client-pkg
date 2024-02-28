@@ -210,9 +210,6 @@ github.com/json-iterator/go
 # github.com/kelseyhightower/envconfig v1.4.0
 ## explicit
 github.com/kelseyhightower/envconfig
-# github.com/kirsle/configdir v0.0.0-20170128060238-e45d2f54772f
-## explicit
-github.com/kirsle/configdir
 # github.com/liggitt/tabwriter v0.0.0-20181228230101-89fcab3d43de
 ## explicit
 github.com/liggitt/tabwriter
