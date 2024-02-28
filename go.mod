@@ -15,7 +15,7 @@ require (
 	k8s.io/api v0.29.2
 	k8s.io/apiextensions-apiserver v0.29.2
 	k8s.io/apimachinery v0.29.2
-	k8s.io/cli-runtime v0.28.5
+	k8s.io/cli-runtime v0.29.2
 	k8s.io/client-go v0.29.2
 	k8s.io/code-generator v0.29.2
 	knative.dev/eventing v0.40.1-0.20240227172002-a154f1a7bd67
