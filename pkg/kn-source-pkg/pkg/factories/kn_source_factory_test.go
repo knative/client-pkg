@@ -19,9 +19,8 @@ import (
 
 	"gotest.tools/v3/assert"
 	"k8s.io/client-go/rest"
+	"knative.dev/client-pkg/pkg/commands/flags"
 	"knative.dev/client-pkg/pkg/kn-source-pkg/pkg/types"
-	"knative.dev/client-pkg/pkg/kn/commands/flags"
-
 	"knative.dev/client-pkg/pkg/kn-source-pkg/pkg/types/typesfakes"
 )
 
