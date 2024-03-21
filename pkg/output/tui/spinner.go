@@ -36,6 +36,7 @@ func (w *widgets) NewSpinner(message string) Spinner {
 	return &BubbleSpinner{
 		InputOutput: output.PrinterFrom(w.ctx),
 		Message:     Message{Text: message},
+		quitChan:    make(chan struct{}),
 	}
 }
 
@@ -43,8 +44,9 @@ type BubbleSpinner struct {
 	output.InputOutput
 	Message
 
-	spin spinner.Model
-	tea  *tea.Program
+	spin     spinner.Model
+	tea      *tea.Program
+	quitChan chan struct{}
 }
 
 func (b *BubbleSpinner) With(fn func(Spinner) error) error {
@@ -80,6 +82,7 @@ func (b *BubbleSpinner) start() {
 	go func() {
 		t := b.tea
 		_, _ = t.Run()
+		close(b.quitChan)
 		if term.IsTerminal(out) {
 			_ = t.ReleaseTerminal()
 		}
@@ -91,7 +94,7 @@ func (b *BubbleSpinner) stop() {
 		return
 	}
 	b.tea.Quit()
-	b.tea.Wait()
+	<-b.quitChan
 	b.tea = nil
 	endMsg := fmt.Sprintf("%s %s\n",
 		b.Message.Text, spinnerStyle().Render("Done"))
