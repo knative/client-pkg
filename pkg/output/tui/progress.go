@@ -78,7 +78,7 @@ type BubbleProgress struct {
 	speed      int
 	prevSpeed  []int
 	err        error
-	ended      chan struct{}
+	quitChan   chan struct{}
 }
 
 func (b *BubbleProgress) With(fn func(ProgressControl) error) error {
@@ -235,11 +235,11 @@ func (b *BubbleProgress) start() {
 		tea.WithInput(b.InOrStdin()),
 		tea.WithOutput(out),
 	)
-	b.ended = make(chan struct{})
+	b.quitChan = make(chan struct{})
 	go func() {
 		t := b.tea
 		_, _ = t.Run()
-		close(b.ended)
+		close(b.quitChan)
 		if term.IsTerminal(out) {
 			if err := t.ReleaseTerminal(); err != nil {
 				panic(err)
@@ -252,11 +252,10 @@ func (b *BubbleProgress) stop() {
 	if b.tea == nil {
 		return
 	}
-	b.tea.Wait()
-
-	<-b.ended
+	b.tea.Quit()
+	<-b.quitChan
 	b.tea = nil
-	b.ended = nil
+	b.quitChan = nil
 }
 
 func (b *BubbleProgress) onProgress(percent float64) {
