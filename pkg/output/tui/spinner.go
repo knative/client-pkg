@@ -36,7 +36,6 @@ func (w *widgets) NewSpinner(message string) Spinner {
 	return &BubbleSpinner{
 		InputOutput: output.PrinterFrom(w.ctx),
 		Message:     Message{Text: message},
-		quitChan:    make(chan struct{}),
 	}
 }
 
@@ -79,6 +78,7 @@ func (b *BubbleSpinner) start() {
 		tea.WithInput(b.InOrStdin()),
 		tea.WithOutput(out),
 	)
+	b.quitChan = make(chan struct{})
 	go func() {
 		t := b.tea
 		_, _ = t.Run()
@@ -93,9 +93,12 @@ func (b *BubbleSpinner) stop() {
 	if b.tea == nil {
 		return
 	}
+
 	b.tea.Quit()
 	<-b.quitChan
+
 	b.tea = nil
+	b.quitChan = nil
 	endMsg := fmt.Sprintf("%s %s\n",
 		b.Message.Text, spinnerStyle().Render("Done"))
 	_, _ = b.OutOrStdout().Write([]byte(endMsg))
