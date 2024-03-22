@@ -43,8 +43,9 @@ type BubbleSpinner struct {
 	output.InputOutput
 	Message
 
-	spin spinner.Model
-	tea  *tea.Program
+	spin     spinner.Model
+	tea      *tea.Program
+	quitChan chan struct{}
 }
 
 func (b *BubbleSpinner) With(fn func(Spinner) error) error {
@@ -77,9 +78,11 @@ func (b *BubbleSpinner) start() {
 		tea.WithInput(b.InOrStdin()),
 		tea.WithOutput(out),
 	)
+	b.quitChan = make(chan struct{})
 	go func() {
 		t := b.tea
 		_, _ = t.Run()
+		close(b.quitChan)
 		if term.IsTerminal(out) {
 			_ = t.ReleaseTerminal()
 		}
@@ -90,9 +93,12 @@ func (b *BubbleSpinner) stop() {
 	if b.tea == nil {
 		return
 	}
+
 	b.tea.Quit()
-	b.tea.Wait()
+	<-b.quitChan
+
 	b.tea = nil
+	b.quitChan = nil
 	endMsg := fmt.Sprintf("%s %s\n",
 		b.Message.Text, spinnerStyle().Render("Done"))
 	_, _ = b.OutOrStdout().Write([]byte(endMsg))
