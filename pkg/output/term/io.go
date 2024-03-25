@@ -30,11 +30,17 @@ func IsReaderTerminal(r io.Reader) bool {
 	return ok && term.IsTerminal(int(f.Fd()))
 }
 
-// IsTerminal returns true if the given writer is a real terminal.
-func IsTerminal(w io.Writer) bool {
+// IsWriterTerminal returns true if the given writer is a real terminal.
+func IsWriterTerminal(w io.Writer) bool {
+	f, ok := w.(*os.File)
+	return ok && term.IsTerminal(int(f.Fd()))
+}
+
+// IsFancy returns true if the given writer is a real terminal, or the color
+// is forced by the environment variables.
+func IsFancy(w io.Writer) bool {
 	if environment.ColorIsForced() {
 		return true
 	}
-	f, ok := w.(*os.File)
-	return ok && environment.NonColorRequested() && term.IsTerminal(int(f.Fd()))
+	return !environment.NonColorRequested() && IsWriterTerminal(w)
 }

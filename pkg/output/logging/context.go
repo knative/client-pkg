@@ -132,7 +132,7 @@ func createDefaultLogger(ctx context.Context) *zap.Logger {
 		zapcore.AddSync(errout),
 		lvl,
 	))
-	if !term.IsTerminal(errout) {
+	if !term.IsFancy(errout) {
 		ec = zap.NewProductionEncoderConfig()
 		logger = zap.New(zapcore.NewCore(
 			zapcore.NewJSONEncoder(ec),

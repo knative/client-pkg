@@ -26,6 +26,7 @@ import (
 	"github.com/charmbracelet/bubbles/progress"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
+	"go.uber.org/multierr"
 	"knative.dev/client-pkg/pkg/output"
 	"knative.dev/client-pkg/pkg/output/term"
 )
@@ -79,12 +80,16 @@ type BubbleProgress struct {
 	prevSpeed  []int
 	err        error
 	quitChan   chan struct{}
+	teaErr     error
 }
 
 func (b *BubbleProgress) With(fn func(ProgressControl) error) error {
 	b.start()
-	defer b.stop()
-	return fn(b)
+	err := func() error {
+		defer b.stop()
+		return fn(b)
+	}()
+	return multierr.Combine(err, b.err, b.teaErr)
 }
 
 func (b *BubbleProgress) Error(err error) {
@@ -244,9 +249,11 @@ func (b *BubbleProgress) start() {
 	b.quitChan = make(chan struct{})
 	go func() {
 		t := b.tea
-		_, _ = t.Run()
+		if _, err := t.Run(); err != nil {
+			b.teaErr = err
+		}
 		close(b.quitChan)
-		if term.IsTerminal(out) {
+		if term.IsWriterTerminal(out) {
 			if err := t.ReleaseTerminal(); err != nil {
 				panic(err)
 			}
