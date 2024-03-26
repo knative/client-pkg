@@ -230,7 +230,7 @@ github.com/mailru/easyjson/jwriter
 # github.com/mattn/go-isatty v0.0.19
 ## explicit; go 1.15
 github.com/mattn/go-isatty
-# github.com/mattn/go-localereader v0.0.1
+# github.com/mattn/go-localereader v0.0.2-0.20220822084749-2491eb6c1c75
 ## explicit
 github.com/mattn/go-localereader
 # github.com/mattn/go-runewidth v0.0.15
