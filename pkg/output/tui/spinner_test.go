@@ -26,9 +26,6 @@ import (
 )
 
 func TestSpinner(t *testing.T) {
-	if testing.Short() {
-		t.Skip("skipping test in short mode.")
-	}
 	ctx := context.TestContext(t)
 	prt := output.NewTestPrinter()
 	ctx = output.WithContext(ctx, prt)

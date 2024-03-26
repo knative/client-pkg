@@ -22,6 +22,7 @@ import (
 	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
+	"go.uber.org/multierr"
 	"knative.dev/client-pkg/pkg/output"
 	"knative.dev/client-pkg/pkg/output/term"
 )
@@ -46,12 +47,16 @@ type BubbleSpinner struct {
 	spin     spinner.Model
 	tea      *tea.Program
 	quitChan chan struct{}
+	teaErr   error
 }
 
 func (b *BubbleSpinner) With(fn func(Spinner) error) error {
 	b.start()
-	defer b.stop()
-	return fn(b)
+	err := func() error {
+		defer b.stop()
+		return fn(b)
+	}()
+	return multierr.Combine(err, b.teaErr)
 }
 
 func (b *BubbleSpinner) Init() tea.Cmd {
@@ -75,15 +80,17 @@ func (b *BubbleSpinner) start() {
 	)
 	out := b.OutOrStdout()
 	b.tea = tea.NewProgram(b,
-		tea.WithInput(b.InOrStdin()),
+		tea.WithInput(safeguardBubbletea964(b.InOrStdin())),
 		tea.WithOutput(out),
 	)
 	b.quitChan = make(chan struct{})
 	go func() {
 		t := b.tea
-		_, _ = t.Run()
+		if _, err := t.Run(); err != nil {
+			b.teaErr = err
+		}
 		close(b.quitChan)
-		if term.IsTerminal(out) {
+		if term.IsWriterTerminal(out) {
 			_ = t.ReleaseTerminal()
 		}
 	}()
