@@ -243,7 +243,7 @@ func (b *BubbleProgress) start() {
 	b.prog = progress.New(progress.WithDefaultGradient())
 	out := b.OutOrStdout()
 	b.tea = tea.NewProgram(b,
-		tea.WithInput(b.InOrStdin()),
+		tea.WithInput(safeguardBubbletea964(b.InOrStdin())),
 		tea.WithOutput(out),
 	)
 	b.quitChan = make(chan struct{})
