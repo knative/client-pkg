@@ -241,10 +241,9 @@ func (b *BubbleProgress) tickSpeed() tea.Cmd {
 
 func (b *BubbleProgress) start() {
 	b.prog = progress.New(progress.WithDefaultGradient())
-	out := b.OutOrStdout()
 	b.tea = tea.NewProgram(b,
 		tea.WithInput(safeguardBubbletea964(b.InOrStdin())),
-		tea.WithOutput(out),
+		tea.WithOutput(b.OutOrStdout()),
 	)
 	b.quitChan = make(chan struct{})
 	go func() {
@@ -253,11 +252,6 @@ func (b *BubbleProgress) start() {
 			b.teaErr = err
 		}
 		close(b.quitChan)
-		if term.IsWriterTerminal(out) {
-			if err := t.ReleaseTerminal(); err != nil {
-				panic(err)
-			}
-		}
 	}()
 }
 
@@ -268,6 +262,10 @@ func (b *BubbleProgress) stop() {
 
 	b.tea.Send(b.quitSignal())
 	<-b.quitChan
+
+	if term.IsWriterTerminal(b.OutOrStdout()) && b.teaErr == nil {
+		b.teaErr = b.tea.ReleaseTerminal()
+	}
 
 	b.tea = nil
 	b.quitChan = nil

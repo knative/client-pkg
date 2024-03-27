@@ -28,8 +28,8 @@ import (
 //
 // TODO: Remove this function once the issue is resolved.
 func safeguardBubbletea964(in io.Reader) io.Reader {
-	if in == nil {
-		return nil
+	if in == nil || in == os.Stdin {
+		return in
 	}
 	if f, ok := in.(*os.File); ok {
 		if st, err := f.Stat(); err != nil {

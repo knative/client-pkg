@@ -78,10 +78,9 @@ func (b *BubbleSpinner) start() {
 		spinner.WithSpinner(spinner.Meter),
 		spinner.WithStyle(spinnerStyle()),
 	)
-	out := b.OutOrStdout()
 	b.tea = tea.NewProgram(b,
 		tea.WithInput(safeguardBubbletea964(b.InOrStdin())),
-		tea.WithOutput(out),
+		tea.WithOutput(b.OutOrStdout()),
 	)
 	b.quitChan = make(chan struct{})
 	go func() {
@@ -90,9 +89,6 @@ func (b *BubbleSpinner) start() {
 			b.teaErr = err
 		}
 		close(b.quitChan)
-		if term.IsWriterTerminal(out) {
-			_ = t.ReleaseTerminal()
-		}
 	}()
 }
 
@@ -103,6 +99,10 @@ func (b *BubbleSpinner) stop() {
 
 	b.tea.Quit()
 	<-b.quitChan
+
+	if term.IsWriterTerminal(b.OutOrStdout()) && b.teaErr == nil {
+		b.teaErr = b.tea.ReleaseTerminal()
+	}
 
 	b.tea = nil
 	b.quitChan = nil
