@@ -45,6 +45,10 @@ func TestSafeguardBubbletea964(t *testing.T) {
 		name: "dev null",
 		in:   openFile(t, os.DevNull),
 		want: nil,
+	}, {
+		name: "stdin",
+		in:   os.Stdin,
+		want: os.Stdin,
 	}}
 	for _, tc := range tcs {
 		tc := tc
