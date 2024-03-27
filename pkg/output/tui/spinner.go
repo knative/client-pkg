@@ -78,10 +78,7 @@ func (b *BubbleSpinner) start() {
 		spinner.WithSpinner(spinner.Meter),
 		spinner.WithStyle(spinnerStyle()),
 	)
-	b.tea = tea.NewProgram(b,
-		tea.WithInput(safeguardBubbletea964(b.InOrStdin())),
-		tea.WithOutput(b.OutOrStdout()),
-	)
+	b.tea = tea.NewProgram(b, ioProgramOptions(b.InputOutput)...)
 	b.quitChan = make(chan struct{})
 	go func() {
 		t := b.tea

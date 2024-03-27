@@ -241,10 +241,7 @@ func (b *BubbleProgress) tickSpeed() tea.Cmd {
 
 func (b *BubbleProgress) start() {
 	b.prog = progress.New(progress.WithDefaultGradient())
-	b.tea = tea.NewProgram(b,
-		tea.WithInput(safeguardBubbletea964(b.InOrStdin())),
-		tea.WithOutput(b.OutOrStdout()),
-	)
+	b.tea = tea.NewProgram(b, ioProgramOptions(b.InputOutput)...)
 	b.quitChan = make(chan struct{})
 	go func() {
 		t := b.tea
