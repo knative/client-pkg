@@ -28,8 +28,12 @@ import (
 //
 // TODO: Remove this function once the issue is resolved.
 func safeguardBubbletea964(in io.Reader) io.Reader {
-	if in == nil || in == os.Stdin {
+	if in == nil {
 		return in
+	}
+	if in == os.Stdin {
+		// this is not a *os.File, so it will not try to do the epoll stuff
+		return bubbletea964Input{Reader: in}
 	}
 	if f, ok := in.(*os.File); ok {
 		if st, err := f.Stat(); err != nil {
@@ -46,4 +50,8 @@ func safeguardBubbletea964(in io.Reader) io.Reader {
 		}
 	}
 	return in
+}
+
+type bubbletea964Input struct {
+	io.Reader
 }
