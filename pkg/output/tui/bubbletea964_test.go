@@ -28,6 +28,7 @@ func TestSafeguardBubbletea964(t *testing.T) {
 	t.Parallel()
 	tmp := t.TempDir()
 	assert.NilError(t, os.WriteFile(tmp+"/file", []byte("test"), 0o600))
+	td := openFile(t, tmp)
 	tf := openFile(t, tmp+"/file")
 	tcs := []safeguardBubbletea964TestCase{{
 		name: "nil input",
@@ -35,7 +36,7 @@ func TestSafeguardBubbletea964(t *testing.T) {
 		want: nil,
 	}, {
 		name: "non-regular file",
-		in:   os.NewFile(0, "/"),
+		in:   os.NewFile(td.Fd(), "/"),
 		want: nil,
 	}, {
 		name: "regular file",
@@ -48,18 +49,12 @@ func TestSafeguardBubbletea964(t *testing.T) {
 	}, {
 		name: "stdin",
 		in:   os.Stdin,
-		want: os.Stdin,
+		want: bubbletea964Input{Reader: os.Stdin},
 	}}
 	for _, tc := range tcs {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
 			t.Parallel()
-			if tf, ok := tc.in.(*os.File); ok {
-				defer func(tf *os.File) {
-					_ = tf.Close()
-				}(tf)
-			}
-
 			got := safeguardBubbletea964(tc.in)
 			assert.Equal(t, got, tc.want)
 		})
@@ -77,5 +72,8 @@ func openFile(tb testing.TB, name string) *os.File {
 	tb.Helper()
 	f, err := os.Open(name)
 	assert.NilError(tb, err)
+	tb.Cleanup(func() {
+		assert.NilError(tb, f.Close())
+	})
 	return f
 }

@@ -25,9 +25,7 @@ import (
 
 func ioProgramOptions(io output.InputOutput) []tea.ProgramOption {
 	opts := make([]tea.ProgramOption, 0, 2)
-	if io.InOrStdin() != nil && io.InOrStdin() != os.Stdin {
-		opts = append(opts, tea.WithInput(safeguardBubbletea964(io.InOrStdin())))
-	}
+	opts = append(opts, tea.WithInput(safeguardBubbletea964(io.InOrStdin())))
 	if io.OutOrStdout() != nil && io.OutOrStdout() != os.Stdout {
 		opts = append(opts, tea.WithOutput(io.OutOrStdout()))
 	}

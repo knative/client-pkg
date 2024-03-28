@@ -24,6 +24,7 @@ import (
 	"github.com/charmbracelet/lipgloss"
 	"go.uber.org/multierr"
 	"knative.dev/client-pkg/pkg/output"
+	"knative.dev/client-pkg/pkg/output/term"
 )
 
 const spinnerColor = lipgloss.Color("205")
@@ -95,6 +96,10 @@ func (b *BubbleSpinner) stop() {
 
 	b.tea.Quit()
 	<-b.quitChan
+
+	if term.IsWriterTerminal(b.OutOrStdout()) && b.teaErr == nil {
+		b.teaErr = b.tea.ReleaseTerminal()
+	}
 
 	b.tea = nil
 	b.quitChan = nil
