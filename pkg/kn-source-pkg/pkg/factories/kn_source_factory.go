@@ -16,7 +16,7 @@ package factories
 
 import (
 	"k8s.io/client-go/rest"
-	"knative.dev/client-pkg/pkg/commands/flags"
+	"knative.dev/client-pkg/pkg/commands/flags/sink"
 	"knative.dev/client-pkg/pkg/kn-source-pkg/pkg/client"
 	"knative.dev/client-pkg/pkg/kn-source-pkg/pkg/types"
 )
@@ -37,7 +37,7 @@ func NewDefaultKnSourceFactory() types.KnSourceFactory {
 
 func (f *DefautKnSourceFactory) CreateKnSourceParams() *types.KnSourceParams {
 	f.knSourceParams = &types.KnSourceParams{
-		SinkFlag: flags.SinkFlags{},
+		SinkFlag: sink.Flag{},
 	}
 	f.knSourceParams.Initialize()
 	return f.knSourceParams
