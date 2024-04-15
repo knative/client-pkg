@@ -353,7 +353,7 @@ func TestNewSourcesV1beta2Client(t *testing.T) {
 	}
 }
 
-func TestNewServingV1alpha1Clients(t *testing.T) {
+func TestNewServingV1beta1Clients(t *testing.T) {
 	basic, err := clientcmd.NewClientConfigFromBytes([]byte(BASIC_KUBECONFIG))
 	namespace := "test"
 	if err != nil {
@@ -381,7 +381,7 @@ func TestNewServingV1alpha1Clients(t *testing.T) {
 			LogHTTP:      tc.logHttp,
 		}
 
-		servingV1alpha1Client, err := p.newServingClientV1beta1(namespace)
+		servingV1beta1Client, err := p.newServingClientV1beta1(namespace)
 
 		switch len(tc.expectedErrString) {
 		case 0:
@@ -397,8 +397,8 @@ func TestNewServingV1alpha1Clients(t *testing.T) {
 			}
 		}
 
-		if servingV1alpha1Client != nil {
-			assert.Assert(t, servingV1alpha1Client.Namespace() == namespace)
+		if servingV1beta1Client != nil {
+			assert.Assert(t, servingV1beta1Client.Namespace() == namespace)
 		}
 	}
 }
@@ -513,7 +513,7 @@ func TestInitialize(t *testing.T) {
 	assert.Assert(t, params.NewEventingClient != nil)
 	assert.Assert(t, params.NewMessagingClient != nil)
 	assert.Assert(t, params.NewDynamicClient != nil)
-	assert.Assert(t, params.NewEventingV1beta1Client != nil)
+	assert.Assert(t, params.NewEventingV1beta2Client != nil)
 
 	basic, err := clientcmd.NewClientConfigFromBytes([]byte(BASIC_KUBECONFIG))
 	if err != nil {
@@ -542,7 +542,7 @@ func TestInitialize(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, sourcesClient != nil)
 
-	eventingBeta1Client, err := params.NewEventingV1beta1Client("mockNamespace")
+	eventingBeta1Client, err := params.NewEventingV1beta2Client("mockNamespace")
 	assert.NilError(t, err)
 	assert.Assert(t, eventingBeta1Client != nil)
 }

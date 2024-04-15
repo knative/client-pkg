@@ -1,18 +1,20 @@
-// Copyright © 2019 The Knative Authors
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/*
+ Copyright 2024 The Knative Authors
 
-package flags
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*/
+
+package list_test
 
 import (
 	"bytes"
@@ -25,6 +27,7 @@ import (
 	metav1beta1 "k8s.io/apimachinery/pkg/apis/meta/v1beta1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/duration"
+	"knative.dev/client-pkg/pkg/commands/flags/list"
 
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 	"knative.dev/client-pkg/pkg/printers"
@@ -56,7 +59,7 @@ var (
 )
 
 func TestListPrintFlagsFormats(t *testing.T) {
-	flags := NewListPrintFlags(nil)
+	flags := list.NewPrintFlags(nil)
 	formats := flags.AllowedFormats()
 	expected := []string{"json", "yaml", "name", "go-template", "go-template-file", "template", "templatefile", "jsonpath", "jsonpath-as-json", "jsonpath-file", "no-headers"}
 	assert.DeepEqual(t, formats, expected)
@@ -64,7 +67,7 @@ func TestListPrintFlagsFormats(t *testing.T) {
 
 func TestListPrintFlags(t *testing.T) {
 	var cmd *cobra.Command
-	flags := NewListPrintFlags(func(h hprinters.PrintHandler) {})
+	flags := list.NewPrintFlags(func(h hprinters.PrintHandler) {})
 
 	cmd = &cobra.Command{}
 	flags.AddFlags(cmd)
@@ -82,8 +85,8 @@ func TestListPrintFlags(t *testing.T) {
 
 func TestListPrintFlagsPrint(t *testing.T) {
 	var cmd *cobra.Command
-	flags := NewListPrintFlags(func(h hprinters.PrintHandler) {
-		h.TableHandler(columnDefs, validPrintFunc)
+	flags := list.NewPrintFlags(func(h hprinters.PrintHandler) {
+		assert.NilError(t, h.TableHandler(columnDefs, validPrintFunc))
 	})
 
 	cmd = &cobra.Command{}
@@ -108,8 +111,8 @@ func TestListPrintFlagsPrint(t *testing.T) {
 
 func TestEnsureNamespaces(t *testing.T) {
 	var cmd *cobra.Command
-	flags := NewListPrintFlags(func(h hprinters.PrintHandler) {
-		h.TableHandler(columnDefs, validPrintFunc)
+	flags := list.NewPrintFlags(func(h hprinters.PrintHandler) {
+		assert.NilError(t, h.TableHandler(columnDefs, validPrintFunc))
 	})
 
 	cmd = &cobra.Command{}

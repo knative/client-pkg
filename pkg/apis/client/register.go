@@ -18,5 +18,5 @@ package client
 
 // GroupName is the group name used in this package
 const (
-	GroupName = "client-pkg.knative.dev"
+	GroupName = "client.knative.dev"
 )

@@ -1,4 +1,4 @@
-// Copyright © 2020 The Knative Authors
+// Copyright © 2021 The Knative Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,27 +11,21 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
-// go:generate go run github.com/maxbrunsfeld/counterfeiter/v6 -generate
 
-package types
+package sources
 
 import (
-	"github.com/spf13/cobra"
-	"knative.dev/client-pkg/pkg/commands"
-	"knative.dev/client-pkg/pkg/commands/flags/sink"
+	"k8s.io/apimachinery/pkg/runtime/schema"
+	v1 "knative.dev/eventing/pkg/apis/sources/v1"
+	"knative.dev/eventing/pkg/apis/sources/v1beta2"
 )
 
-type KnSourceParams struct {
-	commands.KnParams
-
-	SinkFlag sink.Flag
-}
-
-func (p *KnSourceParams) AddCommonFlags(cmd *cobra.Command) {
-	commands.AddNamespaceFlags(cmd.Flags(), true)
-}
-
-func (p *KnSourceParams) AddCreateUpdateFlags(cmd *cobra.Command) {
-	p.SinkFlag.Add(cmd)
+// BuiltInSourcesGVKs returns the GVKs for built in sources
+func BuiltInSourcesGVKs() []schema.GroupVersionKind {
+	return []schema.GroupVersionKind{
+		v1.SchemeGroupVersion.WithKind("ApiServerSource"),
+		v1.SchemeGroupVersion.WithKind("ContainerSource"),
+		v1.SchemeGroupVersion.WithKind("SinkBinding"),
+		v1beta2.SchemeGroupVersion.WithKind("PingSource"),
+	}
 }

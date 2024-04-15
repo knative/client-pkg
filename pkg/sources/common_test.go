@@ -11,27 +11,26 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
-// go:generate go run github.com/maxbrunsfeld/counterfeiter/v6 -generate
 
-package types
+package sources
 
 import (
-	"github.com/spf13/cobra"
-	"knative.dev/client-pkg/pkg/commands"
-	"knative.dev/client-pkg/pkg/commands/flags/sink"
+	"testing"
+
+	"gotest.tools/v3/assert"
+
+	sourcesv1 "knative.dev/eventing/pkg/apis/sources/v1"
+	sourcesv1beta2 "knative.dev/eventing/pkg/apis/sources/v1beta2"
 )
 
-type KnSourceParams struct {
-	commands.KnParams
-
-	SinkFlag sink.Flag
-}
-
-func (p *KnSourceParams) AddCommonFlags(cmd *cobra.Command) {
-	commands.AddNamespaceFlags(cmd.Flags(), true)
-}
-
-func (p *KnSourceParams) AddCreateUpdateFlags(cmd *cobra.Command) {
-	p.SinkFlag.Add(cmd)
+func TestBuiltInSourcesGVks(t *testing.T) {
+	gvks := BuiltInSourcesGVKs()
+	for _, each := range gvks {
+		if each.Kind != "PingSource" {
+			assert.DeepEqual(t, each.GroupVersion(), sourcesv1.SchemeGroupVersion)
+		} else {
+			assert.DeepEqual(t, each.GroupVersion(), sourcesv1beta2.SchemeGroupVersion)
+		}
+	}
+	assert.Equal(t, len(gvks), 4)
 }

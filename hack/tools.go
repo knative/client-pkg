@@ -20,6 +20,6 @@ package tools
 import (
 	_ "k8s.io/code-generator"
 	_ "k8s.io/code-generator/cmd/deepcopy-gen"
-	_ "knative.dev/hack"
+	_ "knative.dev/hack/cmd/script"
 	_ "knative.dev/pkg/hack"
 )
