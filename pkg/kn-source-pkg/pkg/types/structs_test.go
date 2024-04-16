@@ -19,7 +19,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"gotest.tools/v3/assert"
-	"knative.dev/client-pkg/pkg/commands/flags"
+	"knative.dev/client-pkg/pkg/commands/flags/sink"
 )
 
 func TestAddCommonFlags(t *testing.T) {
@@ -52,6 +52,6 @@ func TestAddCreateUpdateFlags(t *testing.T) {
 
 func newFakeKnSourceParams() *KnSourceParams {
 	return &KnSourceParams{
-		SinkFlag: flags.SinkFlags{},
+		SinkFlag: sink.Flag{},
 	}
 }

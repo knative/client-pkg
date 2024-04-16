@@ -19,7 +19,7 @@ import (
 
 	"gotest.tools/v3/assert"
 	"k8s.io/client-go/rest"
-	"knative.dev/client-pkg/pkg/commands/flags"
+	"knative.dev/client-pkg/pkg/commands/flags/sink"
 	"knative.dev/client-pkg/pkg/kn-source-pkg/pkg/types"
 	"knative.dev/client-pkg/pkg/kn-source-pkg/pkg/types/typesfakes"
 )
@@ -49,7 +49,7 @@ func TestCreateKnSourceClient(t *testing.T) {
 
 func newDefaultKnSourceFactory() types.KnSourceFactory {
 	return &DefautKnSourceFactory{
-		knSourceParams:     &types.KnSourceParams{SinkFlag: flags.SinkFlags{}},
+		knSourceParams:     &types.KnSourceParams{SinkFlag: sink.Flag{}},
 		knSourceClientFunc: fakeKnSourceClientFunc,
 	}
 }

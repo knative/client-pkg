@@ -1,18 +1,20 @@
-// Copyright © 2019 The Knative Authors
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/*
+ Copyright 2024 The Knative Authors
 
-package flags
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*/
+
+package list
 
 import (
 	"io"
@@ -26,16 +28,15 @@ import (
 	"knative.dev/client-pkg/pkg/util"
 )
 
-// ListFlags composes common printer flag structs
-// used in the list command.
-type ListPrintFlags struct {
+// PrintFlags composes common printer flag structs used in the list command.
+type PrintFlags struct {
 	GenericPrintFlags  *genericclioptions.PrintFlags
 	HumanReadableFlags *commands.HumanPrintFlags
 	PrinterHandler     func(h hprinters.PrintHandler)
 }
 
 // AllowedFormats is the list of formats in which data can be displayed
-func (f *ListPrintFlags) AllowedFormats() []string {
+func (f *PrintFlags) AllowedFormats() []string {
 	formats := f.GenericPrintFlags.AllowedFormats()
 	formats = append(formats, f.HumanReadableFlags.AllowedFormats()...)
 	return formats
@@ -43,7 +44,7 @@ func (f *ListPrintFlags) AllowedFormats() []string {
 
 // ToPrinter attempts to find a composed set of ListTypesFlags suitable for
 // returning a printer based on current flag values.
-func (f *ListPrintFlags) ToPrinter() (hprinters.ResourcePrinter, error) {
+func (f *PrintFlags) ToPrinter() (hprinters.ResourcePrinter, error) {
 	// if there are flags specified for generic printing
 	if f.GenericPrintFlags.OutputFlagSpecified() {
 		p, err := f.GenericPrintFlags.ToPrinter()
@@ -61,7 +62,7 @@ func (f *ListPrintFlags) ToPrinter() (hprinters.ResourcePrinter, error) {
 }
 
 // Print is to print an Object to a Writer
-func (f *ListPrintFlags) Print(obj runtime.Object, w io.Writer) error {
+func (f *PrintFlags) Print(obj runtime.Object, w io.Writer) error {
 	printer, err := f.ToPrinter()
 	if err != nil {
 		return err
@@ -80,15 +81,15 @@ func (f *ListPrintFlags) Print(obj runtime.Object, w io.Writer) error {
 
 // AddFlags receives a *cobra.Command reference and binds
 // flags related to humanreadable and template printing.
-func (f *ListPrintFlags) AddFlags(cmd *cobra.Command) {
+func (f *PrintFlags) AddFlags(cmd *cobra.Command) {
 	f.GenericPrintFlags.AddFlags(cmd)
 	f.HumanReadableFlags.AddFlags(cmd)
 }
 
-// NewListFlags returns flags associated with humanreadable,
-// template, and "name" printing, with default values set.
-func NewListPrintFlags(printer func(h hprinters.PrintHandler)) *ListPrintFlags {
-	return &ListPrintFlags{
+// NewPrintFlags returns flags associated with humanreadable, template, and
+// "name" printing, with default values set.
+func NewPrintFlags(printer func(h hprinters.PrintHandler)) *PrintFlags {
+	return &PrintFlags{
 		GenericPrintFlags:  genericclioptions.NewPrintFlags(""),
 		HumanReadableFlags: commands.NewHumanPrintFlags(),
 		PrinterHandler:     printer,
@@ -97,6 +98,6 @@ func NewListPrintFlags(printer func(h hprinters.PrintHandler)) *ListPrintFlags {
 
 // EnsureWithNamespace ensures that humanreadable flags return
 // a printer capable of printing with a "namespace" column.
-func (f *ListPrintFlags) EnsureWithNamespace() {
+func (f *PrintFlags) EnsureWithNamespace() {
 	f.HumanReadableFlags.EnsureWithNamespace()
 }
