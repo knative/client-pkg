@@ -20,5 +20,4 @@ ignore:
   - "hack"
   - "pkg/client"
   - "test"
-  - "third_party"
   - "vendor"
