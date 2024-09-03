@@ -1,3 +1,4 @@
+# Deprecated: use knative.dev/client/pkg instead.
 module knative.dev/client-pkg
 
 go 1.22
