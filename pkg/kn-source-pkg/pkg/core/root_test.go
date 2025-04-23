@@ -15,7 +15,6 @@
 package core
 
 import (
-	"fmt"
 	"testing"
 
 	"gotest.tools/v3/assert"
@@ -64,7 +63,7 @@ func testSubCommands(t *testing.T, cmd *cobra.Command, subCommandNames []string)
 	assert.Equal(t, len(childrenSubCommandsMap), len(subCommandNames))
 	for _, childCmd := range cmd.Commands() {
 		if childrenSubCommandsMap[childCmd.Name()] == false {
-			t.Errorf(fmt.Sprintf("did not find command %s as child of root command", childCmd.Name()))
+			t.Errorf("did not find command %s as child of root command", childCmd.Name())
 		}
 	}
 }
@@ -83,7 +82,7 @@ func testSubCommandsRunE(t *testing.T, cmd *cobra.Command, subCommandNames []str
 	assert.Equal(t, len(childrenSubCommandsMap), len(subCommandNames))
 	for _, childCmd := range cmd.Commands() {
 		if _, ok := childrenSubCommandsMap[childCmd.Name()]; childCmd.Name() != "help" && !ok {
-			t.Errorf(fmt.Sprintf("did not find RunE func for command %s", childCmd.Name()))
+			t.Errorf("did not find RunE func for command %s", childCmd.Name())
 		}
 	}
 }
@@ -102,7 +101,7 @@ func testSubCommandsFlags(t *testing.T, cmd *cobra.Command, subCommandNames []st
 	assert.Equal(t, len(childrenSubCommandsMap), len(subCommandNames))
 	for _, childCmd := range cmd.Commands() {
 		if childrenSubCommandsMap[childCmd.Name()] == nil {
-			t.Errorf(fmt.Sprintf("did not find FlagSet for command %s", childCmd.Name()))
+			t.Errorf("did not find FlagSet for command %s", childCmd.Name())
 		}
 	}
 }
